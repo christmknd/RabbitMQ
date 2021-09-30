@@ -1,0 +1,7 @@
+{
+  "name": "RbmqImplem",
+  "version": "1.0.0",
+  "dependencies": {
+    "amqplib": "^0.8.0"
+  }
+}
