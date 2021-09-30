@@ -4,7 +4,7 @@ const fs = require('fs')
 const instant = new Date();
 
 const minute = instant.getHours() + ":" + instant.getMinutes() + ":" + instant.getSeconds() + ':' + instant.getMilliseconds();
-fs.open('producer.log','w', function (err,file){
+fs.open('prod.log','w', function (err,file){
     if(err) throw err ;
 })
 
