@@ -4,7 +4,7 @@ const fs = require('fs')
 const instant = new Date();
 
 const minute = instant.getHours() + ":" + instant.getMinutes() + ":" + instant.getSeconds() + ':' + instant.getMilliseconds();
-fs.open('consommateur.log','w', function (err,file){
+fs.open('cons5.log','w', function (err,file){
     if(err) throw err ;
 })
 
@@ -18,7 +18,7 @@ amqp.connect('amqp://localhost',(err,connection) => {
             throw err;
         }
 
-        let queue = 'channel_one';
+        let queue = 'channel_four';
         const content = 'Le consommateur à reçu le message à ' + minute + '\n' ;
 
         channel.assertQueue(queue,{
@@ -27,7 +27,7 @@ amqp.connect('amqp://localhost',(err,connection) => {
 
         console.log(" Waiting for messages in %s . To exit press CTRL+C",queue);
         channel.consume(queue,(msg) => {
-            fs.writeFile('consommateur.log',content,err => {
+            fs.writeFile('cons5.log',content,err => {
                 if(err) {
                     console.error(err);
                     return
