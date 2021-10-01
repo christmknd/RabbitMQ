@@ -4,7 +4,7 @@ const fs = require('fs')
 const instant = new Date();
 
 const minute = instant.getHours() + ":" + instant.getMinutes() + ":" + instant.getSeconds() + ':' + instant.getMilliseconds();
-fs.open('prod.log','w', function (err,file){
+fs.open('prod2.log','w', function (err,file){
     if(err) throw err ;
 })
 
@@ -18,8 +18,8 @@ amqp.connect('amqp://localhost',(err,connection) => {
             throw err;
         }
 
-        let queue = 'channel_two';
-        let msg = process.argv.slice(2).join(' ') || 'Fanout Exchange';
+        let queue = 'channel_three';
+        let msg = process.argv.slice(2).join(' ') || 'Pattern 3 , producer 2';
         const content = 'Le message"' + msg + '" à été envoyé à ' + minute + '\n' ;
 
         channel.assertQueue(queue,{
@@ -36,7 +36,7 @@ amqp.connect('amqp://localhost',(err,connection) => {
             console.log("x sent '%s'",msg);
         }while (i<5)
 
-        fs.writeFile('prod.log', content, err => {
+        fs.writeFile('prod2.log', content, err => {
             if(err) {
                 console.log(err);
                 return
