@@ -4,7 +4,7 @@ const fs = require('fs')
 const instant = new Date();
 
 const minute = instant.getHours() + ":" + instant.getMinutes() + ":" + instant.getSeconds() + ':' + instant.getMilliseconds();
-fs.open('prod.log','w', function (err,file){
+fs.open('prod6.log','w', function (err,file){
     if(err) throw err ;
 })
 
@@ -18,8 +18,8 @@ amqp.connect('amqp://localhost',(err,connection) => {
             throw err;
         }
 
-        let queue = 'channel_two';
-        let msg = process.argv.slice(2).join(' ') || 'Fanout Exchange';
+        let queue = 'channel_five';
+        let msg = 'Pattern 4 , producer 2';
         const content = 'Le message"' + msg + '" à été envoyé à ' + minute + '\n' ;
 
         channel.assertQueue(queue,{
@@ -29,23 +29,14 @@ amqp.connect('amqp://localhost',(err,connection) => {
         let i = 0;
         do {
             i = i +1;
-            channel.sendToQueue(queue,Buffer.from(msg) , {
-                persistent : true
-            });
-
-            console.log("x sent '%s'",msg);
+            channel.sendToQueue(queue,Buffer.from(msg));
+            console.log('Le producteur à envoyé %s',msg) ;
+            fs.writeFile('prod6.log',content,err => {
+                if(err){
+                    console.error(err);
+                    return
+                }
+            })
         }while (i<5)
-
-        fs.writeFile('prod.log', content, err => {
-            if(err) {
-                console.log(err);
-                return
-            }
-        })
-    });
-
-    setTimeout(function (){
-        connection.close();
-        process.exit(0)
-    },500);
+    })
 })
