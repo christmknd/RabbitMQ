@@ -1,10 +1,10 @@
 # RabbitMQ
 
-Projet réalisé pendant mon alternance au sein de Swisslife.
+Projet réalisé pendant mon alternance.
 
 ### Problématique
 
-Le but de ce projet était de faire communiquer entre elles deux applications internes de Swisslife, afin qu'elles puissent s'envoyer des informations. Pour se faire, j'ai choisi d'utiliser des messages brokers.
+Le but de ce projet était de faire communiquer entre elles deux applications , afin qu'elles puissent s'envoyer des informations. Pour se faire, j'ai choisi d'utiliser des messages brokers.
 
 Après avoir fait un benchmark des messages brokers, les plus pertinents m'ont apparu être Kafka et RabbitMQ
 
